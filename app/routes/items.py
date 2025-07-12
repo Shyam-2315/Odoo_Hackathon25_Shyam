@@ -1,42 +1,23 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from typing import List
-from app.database import SessionLocal
-from app.models.item import Item, ItemStatus
+from app.schemas import item as item_schema
+from app.crud import item as item_crud
+from app.dependencies import get_db, get_current_user
 from app.models.user import User
-from app.schemas.item import ItemCreate, ItemResponse
-from app.dependencies import get_current_user
 
-router = APIRouter()
+router = APIRouter(prefix="/items", tags=["Items"])
 
-# DB Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+@router.post("/", response_model=item_schema.ItemOut)
+def create_item(item: item_schema.ItemCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return item_crud.create_item(db, item, owner_id=current_user.id)
 
-#1. Get all approved items
-@router.get("/", response_model=List[ItemResponse])
-def get_items(db: Session = Depends(get_db)):
-    return db.query(Item).filter(Item.status == ItemStatus.approved).all()
+@router.get("/", response_model=list[item_schema.ItemOut])
+def read_items(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    return item_crud.get_items(db, skip=skip, limit=limit)
 
-
-#2. Get item by ID
-@router.get("/{item_id}", response_model=ItemResponse)
-def get_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(Item).filter(Item.id == item_id).first()
-    if not item:
-        raise HTTPException(status_code=404, detail="Item not found")
-    return item
-
-
-#3. Add a new item
-@router.post("/", response_model=ItemResponse)
-def add_item(item: ItemCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    new_item = Item(**item.dict(), owner_id=current_user.id)
-    db.add(new_item)
-    db.commit()
-    db.refresh(new_item)
-    return new_item
+@router.delete("/{item_id}", response_model=item_schema.ItemOut)
+def delete_item(item_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    item = item_crud.get_item_by_id(db, item_id)
+    if not item or item.owner_id != current_user.id:
+        raise HTTPException(status_code=404, detail="Item not found or unauthorized")
+    return item_crud.delete_item(db, item_id)

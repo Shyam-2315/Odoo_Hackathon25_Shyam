@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, Text, ForeignKey, Enum
+from sqlalchemy import Column, Integer, String, Enum, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from app.database import Base
 import enum
@@ -12,15 +12,11 @@ class Item(Base):
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
+    name = Column(String, nullable=False)
     description = Column(Text)
-    category = Column(String)
-    size = Column(String)
-    condition = Column(String)
-    tags = Column(String)  
     image_url = Column(String)
-    is_available = Column(Boolean, default=True)
+    size = Column(String)
     status = Column(Enum(ItemStatus), default=ItemStatus.pending)
-    owner_id = Column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("User")
+    owner_id = Column(Integer, ForeignKey("users.id"))
+    owner = relationship("User", back_populates="items")

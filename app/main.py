@@ -1,17 +1,23 @@
 from fastapi import FastAPI
-from app.routes import auth, items, swaps, admin
-from app.database import engine, Base
-from app.models import user, item, swap  # Ensure models are imported
+from app.database import Base, engine
+from app.routes import auth, items, swaps
+from app.models import user, item, swap  # Ensure models are loaded so tables are created
 
+# Create database tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(
+    title="ReWear Backend API",
+    version="1.0.0",
+    description="Backend service for the ReWear platform"
+)
 
-app.include_router(auth.router, prefix="/auth", tags=["Auth"])
-app.include_router(items.router, prefix="/items", tags=["Items"])
-app.include_router(swaps.router, prefix="/swaps", tags=["Swaps"])
-app.include_router(admin.router, prefix="/admin", tags=["Admin"])
+# Include route modules
+app.include_router(auth.router)
+app.include_router(items.router)
+app.include_router(swaps.router)
 
+# Root endpoint
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to ReWear API"}
+def root():
+    return {"message": "ReWear Backend API is running."}

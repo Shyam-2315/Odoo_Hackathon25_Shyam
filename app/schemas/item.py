@@ -1,26 +1,25 @@
 from pydantic import BaseModel
 from typing import Optional
+from enum import Enum
 
+class ItemStatus(str, Enum):
+    pending = "pending"
+    approved = "approved"
+    rejected = "rejected"
 
 class ItemBase(BaseModel):
-    title: str
-    description: str
-    category: str
-    size: str
-    condition: str
-    tags: Optional[str] = None
-    image_url: Optional[str] = None
-
+    name: str
+    description: Optional[str]
+    image_url: Optional[str]
+    size: Optional[str]
 
 class ItemCreate(ItemBase):
     pass
 
-
-class ItemResponse(ItemBase):
+class ItemOut(ItemBase):
     id: int
-    is_available: bool
-    status: str
+    status: ItemStatus
     owner_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
