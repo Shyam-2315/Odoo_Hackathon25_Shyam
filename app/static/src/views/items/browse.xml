@@ -1,0 +1,28 @@
+<template id="browse_page" name="Browse Items">
+    <t t-call="website.layout">
+        <div class="container">
+            <h1 class="section-title">Available Items</h1>
+            <div class="filter-bar">
+                <!-- Filter controls would go here -->
+            </div>
+            <div class="items-grid">
+                <t t-foreach="items" t-as="item">
+                    <div class="item-card">
+                        <img t-att-src="item.image_url" class="item-image" t-att-alt="item.name"/>
+                        <div class="item-details">
+                            <h3 class="item-title" t-esc="item.name"/>
+                            <p class="item-meta" t-esc="'Size ' + item.size + ' | ' + item.condition"/>
+                            <p class="item-points" t-esc="item.points + ' points'"/>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <a href="#" class="btn btn-outline" t-att-data-item-id="item.id" 
+                                   style="padding: 8px 12px;">Details</a>
+                                <a href="#" class="btn btn-primary btn-propose-swap" 
+                                   t-att-data-item-id="item.id" style="padding: 8px 12px;">Swap</a>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</template>

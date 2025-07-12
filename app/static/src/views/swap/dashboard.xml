@@ -1,0 +1,45 @@
+<template id="swap_dashboard" name="Swap Dashboard">
+    <t t-call="website.layout">
+        <div class="container">
+            <h1 class="section-title">My Swaps</h1>
+            
+            <h2 style="margin: 30px 0 15px;">Pending Swaps</h2>
+            <t t-foreach="pending_swaps" t-as="swap">
+                <div class="swap-card">
+                    <span class="swap-status status-pending">Pending</span>
+                    <div class="swap-items">
+                        <div class="swap-item">
+                            <strong>Your Item:</strong>
+                            <span t-esc="swap.offered_item.name"/>
+                        </div>
+                        <span class="swap-arrow">→</span>
+                        <div class="swap-item">
+                            <strong>Their Item:</strong>
+                            <span t-esc="swap.requested_item.name"/>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="margin-left: auto;">View</button>
+                </div>
+            </t>
+            
+            <h2 style="margin: 30px 0 15px;">Completed Swaps</h2>
+            <t t-foreach="completed_swaps" t-as="swap">
+                <div class="swap-card">
+                    <span class="swap-status status-completed">Completed</span>
+                    <div class="swap-items">
+                        <div class="swap-item">
+                            <strong>Your Item:</strong>
+                            <span t-esc="swap.offered_item.name"/>
+                        </div>
+                        <span class="swap-arrow">→</span>
+                        <div class="swap-item">
+                            <strong>Their Item:</strong>
+                            <span t-esc="swap.requested_item.name"/>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="margin-left: auto;">Details</button>
+                </div>
+            </t>
+        </div>
+    </t>
+</template>

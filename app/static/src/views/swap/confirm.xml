@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="my_items_page" name="My Listed Items">
+    <t t-call="website.layout">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+          <h1 class="section-title">My Listed Items</h1>
+          <a href="/items/new" class="btn btn-primary">
+            <i class="fa fa-plus"/> List New Item
+          </a>
+        </div>
+
+        <div class="items-grid">
+          <t t-foreach="user_items" t-as="item">
+            <div class="item-card">
+              <img t-att-src="item.image_url" class="item-image" t-att-alt="item.name"/>
+              <div class="item-details">
+                <h3 class="item-title" t-esc="item.name"/>
+                <p class="item-meta" t-esc="'Size ' + item.size + ' | ' + item.condition"/>
+                <p class="item-meta" t-esc="'Listed on ' + item.list_date"/>
+                <p class="item-points" t-esc="item.points + ' points'"/>
+                
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                  <a t-att-href="'/items/' + item.id + '/edit'" class="btn btn-outline" style="flex: 1; text-align: center;">
+                    Edit
+                  </a>
+                  <a href="#" class="btn btn-outline" t-att-data-item-id="item.id" style="flex: 1; text-align: center;">
+                    Remove
+                  </a>
+                </div>
+              </div>
+            </div>
+          </t>
+        </div>
+
+        <t t-if="not user_items">
+          <div style="text-align: center; padding: 50px 0;">
+            <p style="font-size: 18px; margin-bottom: 20px;">You haven't listed any items yet.</p>
+            <a href="/items/new" class="btn btn-primary">
+              <i class="fa fa-plus"/> List Your First Item
+            </a>
+          </div>
+        </t>
+      </div>
+    </t>
+  </template>
+</odoo>

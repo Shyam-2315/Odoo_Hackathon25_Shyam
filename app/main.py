@@ -22,7 +22,7 @@ app.include_router(items.router)
 app.include_router(swaps.router)
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # Serve XML or landing HTML file
 @app.get("/", response_class=FileResponse)
