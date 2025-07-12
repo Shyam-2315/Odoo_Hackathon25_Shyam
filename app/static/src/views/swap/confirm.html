@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Swap - ReWear</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .swap-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="mb-4">Confirm Swap</h1>
+        
+        <div class="row">
+            <div class="col-md-5 swap-card">
+                <h3>You're Offering</h3>
+                <img src="https://via.placeholder.com/300x200?text=Your+Item" class="img-fluid rounded mb-3">
+                <h5>Blue Summer Dress</h5>
+                <p>Size: M | 200 points</p>
+            </div>
+            
+            <div class="col-md-2 text-center align-self-center">
+                <i class="fas fa-exchange-alt fa-3x text-muted"></i>
+            </div>
+            
+            <div class="col-md-5 swap-card">
+                <h3>You're Requesting</h3>
+                <img src="https://via.placeholder.com/300x200?text=Their+Item" class="img-fluid rounded mb-3">
+                <h5>Denim Jacket</h5>
+                <p>Size: L | 250 points</p>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Swap Message</h5>
+                <textarea class="form-control" rows="4" placeholder="Write a message to the owner..."></textarea>
+                <div class="d-flex justify-content-between mt-3">
+                    <a href="/item/123" class="btn btn-outline-secondary">Cancel</a>
+                    <button class="btn btn-primary">Confirm Swap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

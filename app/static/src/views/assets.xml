@@ -7,10 +7,11 @@
         </xpath>
     </template>
     
-    <template id="assets_frontend" name="rewear frontend assets" inherit_id="website.assets_frontend">
+    <template id="assets_frontend" inherit_id="website.assets_frontend">
         <xpath expr="." position="inside">
+            <!-- Replace 'rewear' with your module name -->
             <link rel="stylesheet" href="/Odoo_Hackathon25_Shyam/static/src/css/style.css"/>
-            <script type="text/javascript" src="/Odoo_Hackathon25_Shyam/static/src/js/main.js"></script>
+            <script src="/Odoo_Hackathon25_Shyam/static/src/js/main.js"></script>
         </xpath>
     </template>
 </odoo>

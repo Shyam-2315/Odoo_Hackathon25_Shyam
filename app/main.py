@@ -21,12 +21,10 @@ app.include_router(auth.router)
 app.include_router(items.router)
 app.include_router(swaps.router)
 
-# Mount static files
+# ✅ Mount frontend static assets (HTML, CSS, JS)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
-# Serve XML or landing HTML file
+# ✅ Serve index.html from static folder
 @app.get("/", response_class=FileResponse)
-def root():
-    return FileResponse(os.path.join("static", "src", "views", "templates.xml"))
-    # If using HTML instead of XML:
-    # return FileResponse(os.path.join("static", "src", "views", "index.html"))
+def serve_homepage():
+    return FileResponse(os.path.join("app", "static", "index.html"))
