@@ -1,0 +1,36 @@
+# Web framework
+fastapi==0.110.1
+uvicorn[standard]==0.29.0
+
+# Database ORM
+SQLAlchemy==2.0.30
+psycopg2-binary==2.9.9  # PostgreSQL adapter
+
+# Alembic for migrations
+alembic==1.13.1
+
+# Auth & Security
+python-jose[cryptography]==3.3.0  # JWT
+passlib[bcrypt]==1.7.4             # Password hashing
+
+# Validation & Parsing
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# CORS (if frontend hosted separately)
+fastapi[all]
+
+# Image Uploading Support (Optional for Cloudinary)
+python-multipart==0.0.9
+
+# Testing
+pytest==8.2.2
+httpx==0.27.0
+
+# Linting / Dev
+black==24.4.2
+flake8==7.0.0
+isort==5.13.2
+
+# Environment variables
+python-dotenv==1.0.1
