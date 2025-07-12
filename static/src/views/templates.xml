@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rewear_homepage" name="ReWear Homepage">
+        <t t-call="website.layout">
+            <!-- Header -->
+            <header class="header">
+                <div class="container header-container">
+                    <a href="/" class="logo">ReWear</a>
+                    <nav>
+                        <button id="mobile-menu-toggle" class="mobile-menu-toggle">☰</button>
+                        <div class="nav-links">
+                            <a href="#how-it-works">How It Works</a>
+                            <a href="#browse">Browse Items</a>
+                            <a href="#about">About</a>
+                            <a href="/my/items">My Items</a>
+                            <a href="/login" class="btn btn-outline">Log In</a>
+                            <a href="/signup" class="btn btn-primary">Sign Up</a>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <h1>Swap Clothes, Save the Planet</h1>
+                    <p>Join our sustainable fashion community to exchange unused clothing through direct swaps or our point-based redemption system.</p>
+                    <div class="cta-buttons">
+                        <a href="/browse" class="btn btn-primary">Start Swapping</a>
+                        <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- How It Works Section -->
+            <section id="how-it-works" class="features">
+                <div class="container">
+                    <h2 class="section-title">How ReWear Works</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">👕</div>
+                            <h3>List an Item</h3>
+                            <p>Upload photos and details of clothing you no longer wear. Our system will suggest a point value.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔄</div>
+                            <h3>Swap or Earn Points</h3>
+                            <p>Find items you love and propose a direct swap or redeem your earned points.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚚</div>
+                            <h3>Easy Shipping</h3>
+                            <p>We provide prepaid shipping labels to make exchanges simple and eco-friendly.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Browse Items Section -->
+            <section id="browse" class="items-section">
+                <div class="container">
+                    <h2 class="section-title">Featured Items</h2>
+                    <div class="carousel">
+                        <div class="carousel-container">
+                            <!-- Items will be dynamically loaded here -->
+                            <t t-foreach="items" t-as="item">
+                                <div class="carousel-item">
+                                    <img t-att-src="item.image_url" t-att-alt="item.name"/>
+                                    <div class="item-details">
+                                        <h3 class="item-title" t-esc="item.name"/>
+                                        <p class="item-meta" t-esc="'Size ' + item.size + ' | ' + item.condition"/>
+                                        <p class="item-points" t-esc="item.points + ' points'"/>
+                                        <a t-att-href="'/item/' + item.id" class="btn btn-outline">View Details</a>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-grid">
+                        <div class="footer-column">
+                            <h3>ReWear</h3>
+                            <p>Making sustainable fashion accessible through clothing swaps and community.</p>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-links">
+                                <li><a href="#how-it-works">How It Works</a></li>
+                                <li><a href="#browse">Browse Items</a></li>
+                                <li><a href="/list">List an Item</a></li>
+                                <li><a href="/impact">Our Impact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Support</h3>
+                            <ul class="footer-links">
+                                <li><a href="/help">Help Center</a></li>
+                                <li><a href="/shipping">Shipping Info</a></li>
+                                <li><a href="/guidelines">Community Guidelines</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Connect</h3>
+                            <ul class="footer-links">
+                                <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                                <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                                <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        <p>&copy; 2023 ReWear. All rights reserved. Sustainable fashion for a better future.</p>
+                    </div>
+                </div>
+            </footer>
+        </t>
+    </template>
+    
+    <!-- Additional templates for other pages -->
+    <template id="rewear_browse" name="Browse Items">
+        <!-- Similar structure to homepage but focused on item browsing -->
+    </template>
+    
+    <template id="rewear_item_detail" name="Item Detail">
+        <!-- Template for individual item details -->
+    </template>
+    
+    <template id="rewear_user_dashboard" name="User Dashboard">
+        <!-- Template for user account management -->
+    </template>
+</odoo>

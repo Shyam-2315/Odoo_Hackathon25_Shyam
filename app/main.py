@@ -1,4 +1,8 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
+
 from app.database import Base, engine
 from app.routes import auth, items, swaps
 from app.models import user, item, swap  # Ensure models are loaded so tables are created
@@ -17,7 +21,12 @@ app.include_router(auth.router)
 app.include_router(items.router)
 app.include_router(swaps.router)
 
-# Root endpoint
-@app.get("/")
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Serve XML or landing HTML file
+@app.get("/", response_class=FileResponse)
 def root():
-    return {"message": "ReWear Backend API is running."}
+    return FileResponse(os.path.join("static", "src", "views", "templates.xml"))
+    # If using HTML instead of XML:
+    # return FileResponse(os.path.join("static", "src", "views", "index.html"))
